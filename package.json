@@ -1,0 +1,29 @@
+{
+  "name": "react-native-audio-player",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fateh999/react-native-audio-player.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "react-native": "*",
+    "react": "*",
+    "typescript": "*",
+    "react-native-video": "*",
+    "@hookstate/core": "*",
+    "@types/react-native": "*",
+    "@types/react": "*",
+    "@types/react-native-video": "*"
+  },
+  "bugs": {
+    "url": "https://github.com/fateh999/react-native-audio-player/issues"
+  },
+  "homepage": "https://github.com/fateh999/react-native-audio-player#readme"
+}
