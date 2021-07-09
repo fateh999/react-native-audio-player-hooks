@@ -1,15 +1,20 @@
+import {PLAYER} from '../constants';
 import PlayerController from './PlayerController';
 
 class PlayerManager {
   players: any = {};
 
-  createPlayer = (keyName: string) => {
+  createPlayer = (keyName: string = PLAYER) => {
     const playerController = new PlayerController();
     this.players[keyName] = playerController;
   };
 
-  getPlayer = (keyName: string): PlayerController => {
+  getPlayer = (keyName: string = PLAYER): PlayerController => {
     return this.players[keyName];
+  };
+
+  deletePlayer = (keyName: string = PLAYER) => {
+    delete this.players[keyName];
   };
 }
 

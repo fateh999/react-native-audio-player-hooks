@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import {
   Icon,
   IconButton,
@@ -13,21 +14,23 @@ import React from 'react';
 import {useWindowDimensions} from 'react-native';
 import {StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {usePlayerProgress} from '../../lib';
-import useAudio from '../../lib/Hooks/useAudio';
-import usePausedState from '../../lib/Hooks/usePausedState';
-import {Player, PLAYER} from '../../PlayerService';
+import {Player} from '../../PlayerService';
 import StatusBarView from '../StatusBarView/StatusBarView';
-import Slider from '@react-native-community/slider';
-import {useState} from 'react';
+import {useRepeat, useAudio, usePausedState, useShuffledState} from '../../lib';
+import SliderProgress from '../SliderProgress/SliderProgress';
 
 function PlayerModal({isOpen, onClose}: any) {
   const {width} = useWindowDimensions();
-  const audio = useAudio(PLAYER);
-  const paused = usePausedState(PLAYER);
-  const progress = usePlayerProgress(PLAYER);
-  const currentProgress = progress.currentTime / progress.playableDuration;
-  const [sliderValue, setSliderValue] = useState(0);
+  const audio = useAudio({
+    onAudioChanged: currentAudio => {
+      if (!currentAudio) {
+        onClose();
+      }
+    },
+  });
+  const paused = usePausedState();
+  const repeat = useRepeat();
+  const shuffled = useShuffledState();
 
   return (
     <Modal
@@ -39,7 +42,7 @@ function PlayerModal({isOpen, onClose}: any) {
       <Image
         alt={'Audio Image'}
         source={{uri: audio?.picture}}
-        style={StyleSheet.absoluteFill}
+        style={[StyleSheet.absoluteFill, {zIndex: -1}]}
         blurRadius={10}
       />
       <Modal.Header>
@@ -63,10 +66,7 @@ function PlayerModal({isOpen, onClose}: any) {
           <VStack flex={1} />
           <VStack>
             <IconButton
-              onPress={() => {
-                onClose();
-                Player.stop();
-              }}
+              onPress={Player.stop}
               m={2}
               icon={
                 <Icon
@@ -90,44 +90,14 @@ function PlayerModal({isOpen, onClose}: any) {
             height={250}
             width={250}
           />
-          <Box h={10} />
+          <Box h={5} />
           <Heading size={'md'} textTransform={'uppercase'} color={'white'}>
             {audio?.name}
           </Heading>
           <Box h={5} />
-          <Box w={250}>
-            <Slider
-              minimumValue={0}
-              maximumValue={1}
-              value={sliderValue || currentProgress}
-              onSlidingComplete={value => {
-                Player.seek(value * progress.playableDuration);
-                setTimeout(() => {
-                  setSliderValue(0);
-                }, 300);
-              }}
-              onSlidingStart={setSliderValue}
-            />
-          </Box>
-          <HStack w={250}>
-            <Heading
-              fontWeight={'400'}
-              color={'white'}
-              numberOfLines={1}
-              size={'xs'}>
-              {Player.formatTimePlayer(progress.currentTime)}
-            </Heading>
-            <Box flex={1} />
-            <Heading
-              fontWeight={'400'}
-              color={'white'}
-              numberOfLines={1}
-              size={'xs'}>
-              {Player.formatTimePlayer(progress.playableDuration)}
-            </Heading>
-          </HStack>
-          <Box h={10} />
-          <HStack alignItems={'center'}>
+          <SliderProgress />
+          <Box h={5} />
+          <HStack alignItems={'center'} w={250}>
             <IconButton
               onPress={Player.prev}
               icon={
@@ -141,7 +111,7 @@ function PlayerModal({isOpen, onClose}: any) {
               rounded={'full'}
               size={'md'}
             />
-            <Box w={10} />
+            <Box flex={1} />
             <IconButton
               onPress={Player.toggle}
               icon={
@@ -158,7 +128,7 @@ function PlayerModal({isOpen, onClose}: any) {
               size={'lg'}
               bg={'white'}
             />
-            <Box w={10} />
+            <Box flex={1} />
             <IconButton
               onPress={Player.next}
               icon={
@@ -174,6 +144,49 @@ function PlayerModal({isOpen, onClose}: any) {
             />
           </HStack>
           <Box h={10} />
+          <HStack alignItems={'center'} w={250}>
+            <IconButton
+              onPress={Player.repeat}
+              icon={
+                <Icon
+                  justifyContent={'center'}
+                  size="md"
+                  as={
+                    <MaterialCommunityIcons
+                      name={
+                        repeat === 'all'
+                          ? 'repeat'
+                          : repeat === 'single'
+                          ? 'repeat-once'
+                          : 'repeat-off'
+                      }
+                    />
+                  }
+                  color={'white'}
+                />
+              }
+              rounded={'full'}
+              size={'md'}
+            />
+            <Box flex={1} />
+            <IconButton
+              onPress={Player.shuffle}
+              icon={
+                <Icon
+                  justifyContent={'center'}
+                  size="md"
+                  as={
+                    <MaterialCommunityIcons
+                      name={shuffled ? 'shuffle-variant' : 'shuffle'}
+                    />
+                  }
+                  color={'white'}
+                />
+              }
+              rounded={'full'}
+              size={'md'}
+            />
+          </HStack>
         </Center>
       </Modal.Body>
     </Modal>

@@ -7,17 +7,20 @@ import usePausedState from '../Hooks/usePausedState';
 import PlayerController from '../Utils/PlayerController';
 import PlayerManager from '../Utils/PlayerManager';
 import convertToProxyURL from 'react-native-video-cache';
+import {PLAYER} from '../constants';
+import useRepeat from '../Hooks/useRepeat';
 
 function AudioPlayer(
   props: Omit<ComponentProps<typeof Video>, 'source'> & {
-    keyName: string;
+    keyName?: string;
   },
 ) {
-  const {keyName} = props;
+  const {keyName = PLAYER} = props;
   const keyNameRef = useRef(keyName);
   const playerControllerRef = useRef<PlayerController>();
-  const audio = useAudio(keyName);
-  const paused = usePausedState('player');
+  const audio = useAudio({keyName});
+  const paused = usePausedState({keyName});
+  const repeat = useRepeat({keyName});
 
   useLayoutEffect(() => {
     playerControllerRef.current = PlayerManager.getPlayer(keyNameRef.current);
@@ -40,6 +43,7 @@ function AudioPlayer(
           }}
           audioOnly
           paused={paused}
+          repeat={repeat === 'single'}
           onPlaybackResume={() => {
             playerControllerRef.current?.paused$.next(false);
           }}

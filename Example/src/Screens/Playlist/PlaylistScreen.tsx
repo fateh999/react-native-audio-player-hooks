@@ -1,11 +1,10 @@
 import {Box, FlatList, Heading, VStack} from 'native-base';
 import React from 'react';
-import {useEffect} from 'react';
 import Header from '../../Components/Header/Header';
 import MiniPlayer from '../../Components/MiniPlayer/MiniPlayer';
 import PlaylistItem from '../../Components/PlaylistItem/PlaylistItem';
-import {AudioPlayer, PlayerManager} from '../../lib';
-import useAudio from '../../lib/Hooks/useAudio';
+import {AudioPlayer, useAudio} from '../../lib';
+import {Player} from '../../PlayerService';
 
 const AUDIOS = [
   {
@@ -20,16 +19,28 @@ const AUDIOS = [
     url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
     picture: 'https://picsum.photos/250/300',
   },
+  {
+    id: '3',
+    name: 'Test 3',
+    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    picture: 'https://picsum.photos/250/300',
+  },
+  {
+    id: '4',
+    name: 'Test 4',
+    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    picture: 'https://picsum.photos/250/300',
+  },
+  {
+    id: '5',
+    name: 'Test 5',
+    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    picture: 'https://picsum.photos/250/300',
+  },
 ];
 
 function PlaylistScreen() {
-  useEffect(() => {
-    setTimeout(() => {
-      const playerController = PlayerManager.getPlayer('player');
-      playerController.load(AUDIOS);
-    }, 2000);
-  }, []);
-  const audio = useAudio('player');
+  const audio = useAudio();
 
   return (
     <VStack flex={1}>
@@ -43,11 +54,15 @@ function PlaylistScreen() {
         data={AUDIOS}
         ListHeaderComponent={() => <Box h={10} />}
         renderItem={({item}) => (
-          <PlaylistItem item={item} active={audio?.id === item.id} />
+          <PlaylistItem
+            item={item}
+            active={audio?.id === item.id}
+            onPress={() => Player.play(item.id, AUDIOS)}
+          />
         )}
       />
       <Box>
-        <AudioPlayer keyName={'player'} />
+        <AudioPlayer />
       </Box>
 
       <MiniPlayer />

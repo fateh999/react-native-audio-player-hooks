@@ -9,17 +9,15 @@ import {
   useDisclose,
   Pressable,
 } from 'native-base';
-import useAudio from '../../lib/Hooks/useAudio';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {usePlayerProgress} from '../../lib';
-import usePausedState from '../../lib/Hooks/usePausedState';
-import {PLAYER, Player} from '../../PlayerService';
+import {useAudio, usePausedState, usePlayerProgress} from '../../lib';
+import {Player} from '../../PlayerService';
 import PlayerModal from '../PlayerModal/PlayerModal';
 
 function MiniPlayer() {
-  const audio = useAudio(PLAYER);
-  const progress = usePlayerProgress(PLAYER);
-  const paused = usePausedState(PLAYER);
+  const audio = useAudio();
+  const progress = usePlayerProgress();
+  const paused = usePausedState();
   const {isOpen, onClose, onOpen} = useDisclose();
 
   return (

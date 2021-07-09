@@ -1,20 +1,13 @@
 import {Heading, HStack, Icon, Pressable, VStack} from 'native-base';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import usePausedState from '../../lib/Hooks/usePausedState';
-import {PLAYER, Player} from '../../PlayerService';
+import {usePausedState} from '../../lib';
 
-function PlaylistItem({item, active}: any) {
-  const paused = usePausedState(PLAYER);
+function PlaylistItem({item, active, onPress}: any) {
+  const paused = usePausedState();
 
   return (
-    <Pressable
-      mx={4}
-      shadow={2}
-      bg={'white'}
-      onPress={() => {
-        Player.play(item.id);
-      }}>
+    <Pressable mx={4} shadow={2} bg={'white'} onPress={onPress}>
       <HStack p={4}>
         <VStack justifyContent={'center'} flex={1}>
           <Heading

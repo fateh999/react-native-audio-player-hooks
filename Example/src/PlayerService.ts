@@ -1,7 +1,5 @@
 import {PlayerManager} from './lib';
 
-export const PLAYER = 'player';
+PlayerManager.createPlayer();
 
-PlayerManager.createPlayer(PLAYER);
-
-export const Player = PlayerManager.getPlayer(PLAYER);
+export const Player = PlayerManager.getPlayer();
