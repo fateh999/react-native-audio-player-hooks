@@ -1,11 +1,11 @@
-import Video from "react-native-video";
-import { BehaviorSubject } from "rxjs";
+import Video from 'react-native-video';
+import {BehaviorSubject} from 'rxjs';
 
 class PlayerController {
-  ref: Video;
+  ref: Video | undefined = undefined;
   currentAudio$: BehaviorSubject<any> = new BehaviorSubject(undefined);
   playList$: BehaviorSubject<any> = new BehaviorSubject([]);
-  playListMap: any;
+  playListMap: any = {};
   paused$ = new BehaviorSubject(true);
   progress$ = new BehaviorSubject({
     currentTime: 0,
@@ -13,19 +13,23 @@ class PlayerController {
     seekableDuration: 0,
   });
 
-  constructor(ref: Video) {
+  constructor() {}
+
+  createRef = (ref: Video) => {
     this.ref = ref;
-  }
+  };
 
   play = (id: string) => {
     const currentAudio = this.currentAudio$.getValue();
     if (id === currentAudio?.id) {
+      this.currentAudio$.next(currentAudio);
       this.toggle();
     } else {
       const audio = this.playListMap[id];
       if (audio) {
         this.currentAudio$.next(audio);
         this.paused$.next(false);
+        this.seek(0);
       }
     }
   };
@@ -40,7 +44,7 @@ class PlayerController {
   };
 
   seek = (seconds: number) => {
-    this.ref.seek(seconds);
+    this.ref?.seek(seconds);
   };
 
   toggle = () => {
@@ -56,6 +60,8 @@ class PlayerController {
       const nextAudioIndex = currentAudioIndex + 1;
       if (nextAudioIndex <= playList.length - 1) {
         this.play(playList[nextAudioIndex].id);
+      } else {
+        this.stop();
       }
     }
   };
@@ -72,7 +78,9 @@ class PlayerController {
     }
   };
 
-  repeat = (mode: "all" | "single" | "none") => {};
+  repeat = (mode: 'all' | 'single' | 'none') => {
+    console.log({mode});
+  };
 
   shuffle = () => {};
 
@@ -82,15 +90,25 @@ class PlayerController {
 
   load = (playlist: Array<any>) => {
     playlist.forEach((audio, index) => {
-      this.playListMap[audio.id] = { ...audio, index };
+      this.playListMap[audio.id] = {...audio, index};
     });
     this.playList$.next(playlist);
   };
 
   stop = () => {
     this.currentAudio$.next(undefined);
-    this.playList$.next([]);
-    this.playListMap = JSON.parse(JSON.stringify({}));
+  };
+
+  formatTimePlayer = (seconds: number) => {
+    return `${new Date(
+      seconds * 1000,
+    ).getUTCMinutes()} : ${this.addZeroToNumber(
+      new Date(seconds * 1000).getUTCSeconds(),
+    )}`;
+  };
+
+  addZeroToNumber = (num: number) => {
+    return num < 10 ? `0${num}` : num;
   };
 }
 
