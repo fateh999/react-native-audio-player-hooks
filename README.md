@@ -192,50 +192,34 @@ flex={1}
 
 - Hooks to show the player progress and current state
 
-      - useAudio(): any
+  - useAudio(): any
 
-      		(Returns current active audio)
+        (Returns current active audio)
 
+  - usePausedState(): boolean
 
+        (Returns active audio paused state)
 
-      - usePausedState(): boolean
+  - useBufferingState(): boolean
 
-      		(Returns active audio paused state)
+        (Returns active audio buffering state)
 
+  - usePlayerProgress()
+    `{ currentTime: number, playableDuration: number, seekableDuration: number}`
 
+        (Returns active audio progress)
 
-      - useBufferingState(): boolean
+  - useRepeat(): 'all' | 'none' | 'single'
 
-      		(Returns active audio buffering state)
+        (Returns repeat mode status)
 
+  - useShuffledState(): boolean
 
+        (Returns whether playlist is shuffled)
 
-      - usePlayerProgress(): {
+  - usePlaylist(): Array<any>
 
-  currentTime: number,
-  playableDuration: number,
-  seekableDuration: number,
-  }
-
-      		(Returns active audio progress)
-
-
-
-      - useRepeat(): 'all' | 'none' | 'single'
-
-      		(Returns repeat mode status)
-
-
-
-      - useShuffledState(): boolean
-
-      		(Returns whether playlist is shuffled)
-
-
-
-      - usePlaylist(): Array<any>
-
-      		(Returns the loaded playlist)
+        (Returns the loaded playlist)
 
 ## Basic Props
 
