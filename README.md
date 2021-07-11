@@ -34,6 +34,10 @@ npm i react-native-audio-player
 
 ```
 
+## Demo
+
+![](player.gif)
+
 ## Usage
 
 - Create a PlayerService file
