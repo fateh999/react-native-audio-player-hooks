@@ -23,7 +23,7 @@ import {
   usePausedState,
   useShuffledState,
   useBufferingState,
-} from 'react-native-audio-player';
+} from 'react-native-audio-player-hooks';
 import SliderProgress from '../SliderProgress/SliderProgress';
 
 function PlayerModal({isOpen, onClose}: any) {

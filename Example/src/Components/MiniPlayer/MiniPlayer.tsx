@@ -14,7 +14,7 @@ import {
   useAudio,
   useBufferingState,
   usePausedState,
-} from 'react-native-audio-player';
+} from 'react-native-audio-player-hooks';
 import {Player} from '../../PlayerService';
 import PlayerModal from '../PlayerModal/PlayerModal';
 import MiniProgress from '../MiniProgress/MiniProgress';

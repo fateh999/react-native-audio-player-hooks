@@ -1,7 +1,7 @@
 import {Heading, HStack, Icon, Pressable, VStack} from 'native-base';
 import React from 'react';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {usePausedState} from 'react-native-audio-player';
+import {usePausedState} from 'react-native-audio-player-hooks';
 
 function PlaylistItem({item, active, onPress}: any) {
   const paused = usePausedState();

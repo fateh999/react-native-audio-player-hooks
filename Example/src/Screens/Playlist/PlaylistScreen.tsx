@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../Components/Header/Header';
 import MiniPlayer from '../../Components/MiniPlayer/MiniPlayer';
 import PlaylistItem from '../../Components/PlaylistItem/PlaylistItem';
-import {AudioPlayer, useAudio} from 'react-native-audio-player';
+import {AudioPlayer, useAudio} from 'react-native-audio-player-hooks';
 import {Player} from '../../PlayerService';
 
 const AUDIOS = [

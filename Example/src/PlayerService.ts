@@ -1,4 +1,4 @@
-import {PlayerManager} from 'react-native-audio-player';
+import {PlayerManager} from 'react-native-audio-player-hooks';
 
 PlayerManager.createPlayer();
 

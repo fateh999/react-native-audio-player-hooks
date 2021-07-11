@@ -43,7 +43,7 @@ npm i react-native-audio-player-hooks
 - Create a PlayerService file
 
 ```typescript
-import { PlayerManager } from "react-native-audio-player";
+import { PlayerManager } from "react-native-audio-player-hooks";
 
 PlayerManager.createPlayer();
 
@@ -72,7 +72,7 @@ import "./PlayerService";
 
 ```jsx
 
-import { AudioPlayer } from  'react-native-audio-player';
+import { AudioPlayer } from  'react-native-audio-player-hooks';
 
 
 

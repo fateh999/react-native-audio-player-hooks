@@ -1,6 +1,6 @@
 import {Heading, Progress} from 'native-base';
 import React, {Fragment} from 'react';
-import {usePlayerProgress} from 'react-native-audio-player';
+import {usePlayerProgress} from 'react-native-audio-player-hooks';
 import {Player} from '../../PlayerService';
 
 function MiniProgress() {

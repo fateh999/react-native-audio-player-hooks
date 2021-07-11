@@ -1,7 +1,7 @@
 import Slider from '@react-native-community/slider';
 import {Box, Heading, HStack} from 'native-base';
 import React, {Fragment, useState} from 'react';
-import {usePlayerProgress} from 'react-native-audio-player';
+import {usePlayerProgress} from 'react-native-audio-player-hooks';
 import {Player} from '../../PlayerService';
 
 function SliderProgress() {
