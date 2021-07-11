@@ -1,4 +1,4 @@
-# react-native-audio-player
+# react-native-audio-player-hooks
 
 - Audio player hooks & Utility Classes to play audio files, using libraries react-native-video rxjs, with playlist handling, player controls.
 
