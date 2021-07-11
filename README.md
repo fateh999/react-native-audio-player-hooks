@@ -1,5 +1,9 @@
 # react-native-audio-player-hooks
 
+[![npm downloads](https://img.shields.io/npm/dm/react-native-audio-player-hooks.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-audio-player-hooks)
+[![npm](https://img.shields.io/npm/dt/react-native-audio-player-hooks.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-audio-player-hooks)
+[![npm](https://img.shields.io/npm/l/react-native-audio-player-hooks?style=for-the-badge)](https://github.com/fateh999/react-native-audio-player-hooks/blob/master/LICENSE)
+
 - Audio player hooks & Utility Classes to play audio files, using libraries react-native-video rxjs, with playlist handling, player controls.
 
 ## Dependencies Installation
