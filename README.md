@@ -30,7 +30,7 @@ or
 
 ```
 
-npm i react-native-audio-player
+npm i react-native-audio-player-hooks
 
 ```
 
