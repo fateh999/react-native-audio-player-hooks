@@ -1,19 +1,16 @@
-import React, {ComponentProps, Fragment} from 'react';
-import {useRef} from 'react';
-import {useLayoutEffect} from 'react';
-import Video from 'react-native-video';
-import useAudio from '../Hooks/useAudio';
-import usePausedState from '../Hooks/usePausedState';
-import PlayerController from '../Utils/PlayerController';
-import PlayerManager from '../Utils/PlayerManager';
-import {PLAYER} from '../constants';
-import useRepeat from '../Hooks/useRepeat';
+import React, { ComponentProps, Fragment } from "react";
+import { useRef } from "react";
+import { useLayoutEffect } from "react";
+import Video from "react-native-video";
+import useAudio from "../Hooks/useAudio";
+import usePausedState from "../Hooks/usePausedState";
+import PlayerController from "../Utils/PlayerController";
+import PlayerManager from "../Utils/PlayerManager";
+import { PLAYER } from "../constants";
+import useRepeat from "../Hooks/useRepeat";
+import { AudioPlayerProps } from "../Types";
 
-function AudioPlayer(
-  props: Omit<ComponentProps<typeof Video>, 'source'> & {
-    keyName?: string;
-  },
-) {
+function AudioPlayer(props: AudioPlayerProps) {
   const {
     keyName = PLAYER,
     automaticallyWaitsToMinimizeStalling = true,
@@ -23,9 +20,9 @@ function AudioPlayer(
   } = props;
   const keyNameRef = useRef(keyName);
   const playerControllerRef = useRef<PlayerController>();
-  const audio = useAudio({keyName});
-  const paused = usePausedState({keyName});
-  const repeat = useRepeat({keyName});
+  const audio = useAudio({ keyName });
+  const paused = usePausedState({ keyName });
+  const repeat = useRepeat({ keyName });
 
   useLayoutEffect(() => {
     playerControllerRef.current = PlayerManager.getPlayer(keyNameRef.current);
@@ -42,14 +39,14 @@ function AudioPlayer(
           audioOnly={audioOnly}
           playWhenInactive={playWhenInactive}
           playInBackground={playInBackground}
-          ref={videoRef => {
+          ref={(videoRef) => {
             if (videoRef) {
               playerControllerRef.current?.createRef(videoRef);
             }
           }}
-          source={{uri: audio.url}}
+          source={{ uri: audio.url }}
           style={{}}
-          onProgress={_progress => {
+          onProgress={(_progress) => {
             playerControllerRef.current?.progress$.next({
               ..._progress,
               playableDuration: audio?.seconds ?? _progress.playableDuration,
@@ -57,7 +54,7 @@ function AudioPlayer(
           }}
           progressUpdateInterval={1000}
           paused={paused}
-          repeat={repeat === 'single'}
+          repeat={repeat === "single"}
           onLoadStart={() => playerControllerRef.current?.buffering$.next(true)}
           onLoad={() => playerControllerRef.current?.buffering$.next(false)}
           onError={() => playerControllerRef.current?.buffering$.next(false)}

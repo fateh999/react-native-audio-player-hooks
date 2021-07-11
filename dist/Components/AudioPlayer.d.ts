@@ -1,6 +1,4 @@
-import { ComponentProps } from 'react';
-import Video from 'react-native-video';
-declare function AudioPlayer(props: Omit<ComponentProps<typeof Video>, 'source'> & {
-    keyName?: string;
-}): JSX.Element;
+/// <reference types="react" />
+import { AudioPlayerProps } from "../Types";
+declare function AudioPlayer(props: AudioPlayerProps): JSX.Element;
 export default AudioPlayer;

@@ -1,5 +1,9 @@
-import { OnProgressData } from 'react-native-video';
-export declare type REPEAT_MODES = 'all' | 'none' | 'single';
+import { ComponentProps } from "react";
+import Video, { OnProgressData } from "react-native-video";
+export declare type AudioPlayerProps = Omit<ComponentProps<typeof Video>, "source"> & {
+    keyName?: string;
+};
+export declare type REPEAT_MODES = "all" | "none" | "single";
 export declare type useAudioType = {
     keyName?: string;
     onAudioChanged?: (currentAudio: any) => void;

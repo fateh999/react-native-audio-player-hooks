@@ -41,7 +41,6 @@ const AUDIOS = [
 
 function PlaylistScreen() {
   const audio = useAudio();
-  console.log('PlaylistScreen rerendered');
 
   return (
     <VStack flex={1}>
