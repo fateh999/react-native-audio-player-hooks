@@ -1,7 +1,7 @@
 {
   "name": "react-native-audio-player",
   "version": "0.0.1",
-  "description": "",
+  "description": "Audio player hooks & Utility Classes to play audio files, using libraries react-native-video, rxjs, with playlist handling, player controls.",
   "scripts": {
     "build": "tsc"
   },
@@ -14,7 +14,14 @@
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "author": "",
+  "keywords": [
+    "AudioPlayer",
+    "Mp3Player",
+    "Playlist",
+    "React",
+    "Native"
+  ],
+  "author": "Fateh Farooqui",
   "license": "MIT",
   "peerDependencies": {
     "react-native": "*",
