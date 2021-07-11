@@ -9,6 +9,7 @@ import {
   Heading,
   HStack,
   VStack,
+  Spinner,
 } from 'native-base';
 import React from 'react';
 import {useWindowDimensions} from 'react-native';
@@ -21,6 +22,7 @@ import {
   useAudio,
   usePausedState,
   useShuffledState,
+  useBufferingState,
 } from 'react-native-audio-player';
 import SliderProgress from '../SliderProgress/SliderProgress';
 
@@ -35,6 +37,7 @@ function PlayerModal({isOpen, onClose}: any) {
     },
   });
   const paused = usePausedState();
+  const buffering = useBufferingState();
   const repeat = useRepeat();
   const shuffled = useShuffledState();
 
@@ -121,14 +124,20 @@ function PlayerModal({isOpen, onClose}: any) {
             <IconButton
               onPress={Player.toggle}
               icon={
-                <Icon
-                  justifyContent={'center'}
-                  size="lg"
-                  as={
-                    <MaterialCommunityIcons name={paused ? 'play' : 'pause'} />
-                  }
-                  color={'light.600'}
-                />
+                buffering ? (
+                  <Spinner size={'lg'} />
+                ) : (
+                  <Icon
+                    justifyContent={'center'}
+                    size="lg"
+                    as={
+                      <MaterialCommunityIcons
+                        name={paused ? 'play' : 'pause'}
+                      />
+                    }
+                    color={'light.600'}
+                  />
+                )
               }
               rounded={'full'}
               size={'lg'}
