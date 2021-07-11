@@ -10,7 +10,11 @@ import {
   Spinner,
 } from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useAudio, useBufferingState, usePausedState} from '../../lib';
+import {
+  useAudio,
+  useBufferingState,
+  usePausedState,
+} from 'react-native-audio-player';
 import {Player} from '../../PlayerService';
 import PlayerModal from '../PlayerModal/PlayerModal';
 import MiniProgress from '../MiniProgress/MiniProgress';

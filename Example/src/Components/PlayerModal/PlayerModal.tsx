@@ -16,7 +16,12 @@ import {StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Player} from '../../PlayerService';
 import StatusBarView from '../StatusBarView/StatusBarView';
-import {useRepeat, useAudio, usePausedState, useShuffledState} from '../../lib';
+import {
+  useRepeat,
+  useAudio,
+  usePausedState,
+  useShuffledState,
+} from 'react-native-audio-player';
 import SliderProgress from '../SliderProgress/SliderProgress';
 
 function PlayerModal({isOpen, onClose}: any) {

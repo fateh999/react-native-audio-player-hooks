@@ -3,7 +3,7 @@ import React from 'react';
 import Header from '../../Components/Header/Header';
 import MiniPlayer from '../../Components/MiniPlayer/MiniPlayer';
 import PlaylistItem from '../../Components/PlaylistItem/PlaylistItem';
-import {AudioPlayer, useAudio} from '../../lib';
+import {AudioPlayer, useAudio} from 'react-native-audio-player';
 import {Player} from '../../PlayerService';
 
 const AUDIOS = [
@@ -61,6 +61,7 @@ function PlaylistScreen() {
             onPress={() => Player.play(item.id, AUDIOS)}
           />
         )}
+        flex={1}
       />
       <Box>
         <AudioPlayer />
