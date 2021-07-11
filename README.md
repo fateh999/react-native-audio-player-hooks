@@ -106,54 +106,57 @@ import "./PlayerService";
 
 - Control the player using the following methods
 
--- Player.toggle()
-Toggles play / pause functionality of the current audio.
+  - Player.toggle()
+    Toggles play / pause functionality of the current audio.
 
--- Player.next()
-Plays next audio in the playlist.
+  - Player.next()
+    Plays next audio in the playlist.
 
--- Player.prev()
-Plays previous audio in the playlist.
+  - Player.prev()
+    Plays previous audio in the playlist.
 
--- Player.repeat()
-Toggles the repeat mode between 'all' | 'none' | 'single'.
+  - Player.repeat()
+    Toggles the repeat mode between 'all' | 'none' | 'single'.
 
--- Player.shuffle()
-Shuffles the playlist.
+  - Player.shuffle()
+    Shuffles the playlist.
 
--- Player.stop()
-Closes the player and clears the playlist, this however does not removes the player instance so you can again load the playlist and play songs using same player.
+  - Player.stop()
+    Closes the player and clears the playlist, this however does not removes the player instance so you can again load the playlist and play songs using same player.
 
--- Player.shuffle()
-Shuffles the playlist.
+  - Player.shuffle()
+    Shuffles the playlist.
 
 - Hooks to show the player progress and current state
 
--- useAudio()
-Returns current active audio
+  - useAudio()
+    Returns current active audio
 
--- usePausedState()
-Returns active audio paused state
+  - usePausedState()
+    Returns active audio paused state
 
--- useBufferingState()
-Returns active audio buffering state
+  - useBufferingState()
+    Returns active audio buffering state
 
--- usePlayerProgress()
-Returns active audio progress returning
-{
-currentTime: 0,
-playableDuration: 0,
-seekableDuration: 0,
-}
+  - usePlayerProgress()
+    Returns active audio progress returning
 
--- useRepeat()
-Returns repeat mode status
+  ```
+  {
+  currentTime: 0,
+  playableDuration: 0,
+  seekableDuration: 0,
+  }
+  ```
 
--- useShuffledState()
-Returns whether playlist is shuffled
+  - useRepeat()
+    Returns repeat mode status
 
--- usePlaylist()
-Returns the loaded playlist
+  - useShuffledState()
+    Returns whether playlist is shuffled
+
+  - usePlaylist()
+    Returns the loaded playlist
 
 ## Basic Props
 
