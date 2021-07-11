@@ -23,6 +23,7 @@ function PlayerModal({isOpen, onClose}: any) {
   const {width} = useWindowDimensions();
   const audio = useAudio({
     onAudioChanged: currentAudio => {
+      console.log({currentAudio});
       if (!currentAudio) {
         onClose();
       }

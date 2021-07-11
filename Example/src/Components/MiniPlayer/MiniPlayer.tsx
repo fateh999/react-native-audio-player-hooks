@@ -1,22 +1,23 @@
 import React, {Fragment} from 'react';
 import {
   Icon,
-  Progress,
   IconButton,
   HStack,
   Heading,
   VStack,
   useDisclose,
   Pressable,
+  Spinner,
 } from 'native-base';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {useAudio, usePausedState, usePlayerProgress} from '../../lib';
+import {useAudio, useBufferingState, usePausedState} from '../../lib';
 import {Player} from '../../PlayerService';
 import PlayerModal from '../PlayerModal/PlayerModal';
+import MiniProgress from '../MiniProgress/MiniProgress';
 
 function MiniPlayer() {
   const audio = useAudio();
-  const progress = usePlayerProgress();
+  const buffering = useBufferingState();
   const paused = usePausedState();
   const {isOpen, onClose, onOpen} = useDisclose();
 
@@ -29,16 +30,20 @@ function MiniPlayer() {
               <IconButton
                 onPress={Player.toggle}
                 icon={
-                  <Icon
-                    justifyContent={'center'}
-                    size="sm"
-                    as={
-                      <MaterialCommunityIcons
-                        name={paused ? 'play' : 'pause'}
-                      />
-                    }
-                    color={'light.600'}
-                  />
+                  buffering ? (
+                    <Spinner size={'sm'} />
+                  ) : (
+                    <Icon
+                      justifyContent={'center'}
+                      size="sm"
+                      as={
+                        <MaterialCommunityIcons
+                          name={paused ? 'play' : 'pause'}
+                        />
+                      }
+                      color={'light.600'}
+                    />
+                  )
                 }
               />
             </VStack>
@@ -48,17 +53,7 @@ function MiniPlayer() {
               </Heading>
             </VStack>
             <HStack alignItems={'center'} flex={5}>
-              <Heading fontWeight={'400'} numberOfLines={1} size={'xs'}>
-                {Player.formatTimePlayer(progress.currentTime)}
-              </Heading>
-              <Progress
-                flex={1}
-                mx={3}
-                value={(progress.currentTime / progress.playableDuration) * 100}
-              />
-              <Heading fontWeight={'400'} numberOfLines={1} size={'xs'}>
-                {Player.formatTimePlayer(progress.playableDuration)}
-              </Heading>
+              <MiniProgress />
             </HStack>
           </HStack>
         </Pressable>

@@ -12,6 +12,11 @@ export type usePausedStateType = {
   onPausedStateChanged?: (_paused: boolean) => void;
 };
 
+export type useBufferingStateType = {
+  keyName?: string;
+  onBufferingStateChanged?: (_buffering: boolean) => void;
+};
+
 export type useShuffledStateType = {
   keyName?: string;
   onShuffledStateChanged?: (_shuffled: boolean) => void;

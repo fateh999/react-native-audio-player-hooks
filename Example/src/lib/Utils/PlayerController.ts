@@ -9,6 +9,7 @@ class PlayerController {
   playListMap: any = {};
   unshuffledPlayList: any = [];
   paused$ = new BehaviorSubject<boolean>(true);
+  buffering$ = new BehaviorSubject<boolean>(false);
   shuffled$ = new BehaviorSubject<boolean>(false);
   repeat$ = new BehaviorSubject<REPEAT_MODES>('none');
   progress$ = new BehaviorSubject<OnProgressData>({
@@ -26,7 +27,7 @@ class PlayerController {
   play = (id: string, currentPlaylist: Array<any> = []) => {
     const currentAudio = this.currentAudio$.getValue();
     if (id === currentAudio?.id) {
-      this.paused$.next(false);
+      this.paused$.next(!this.paused$.getValue());
     } else {
       const audio = this.playListMap[id];
       if (audio) {
@@ -38,7 +39,6 @@ class PlayerController {
         const _audio = this.playListMap[id];
         this.currentAudio$.next(_audio);
         this.paused$.next(false);
-        this.seek(0);
       }
     }
   };

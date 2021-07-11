@@ -6,7 +6,6 @@ import useAudio from '../Hooks/useAudio';
 import usePausedState from '../Hooks/usePausedState';
 import PlayerController from '../Utils/PlayerController';
 import PlayerManager from '../Utils/PlayerManager';
-import convertToProxyURL from 'react-native-video-cache';
 import {PLAYER} from '../constants';
 import useRepeat from '../Hooks/useRepeat';
 
@@ -15,7 +14,13 @@ function AudioPlayer(
     keyName?: string;
   },
 ) {
-  const {keyName = PLAYER} = props;
+  const {
+    keyName = PLAYER,
+    automaticallyWaitsToMinimizeStalling = true,
+    audioOnly = false,
+    playInBackground = false,
+    playWhenInactive = false,
+  } = props;
   const keyNameRef = useRef(keyName);
   const playerControllerRef = useRef<PlayerController>();
   const audio = useAudio({keyName});
@@ -31,19 +36,31 @@ function AudioPlayer(
       {audio?.url && (
         <Video
           {...props}
+          automaticallyWaitsToMinimizeStalling={
+            automaticallyWaitsToMinimizeStalling
+          }
+          audioOnly={audioOnly}
+          playWhenInactive={playWhenInactive}
+          playInBackground={playInBackground}
           ref={videoRef => {
             if (videoRef) {
               playerControllerRef.current?.createRef(videoRef);
             }
           }}
-          source={{uri: convertToProxyURL(audio?.url)}}
+          source={{uri: audio.url}}
           style={{}}
           onProgress={_progress => {
-            playerControllerRef.current?.progress$.next(_progress);
+            playerControllerRef.current?.progress$.next({
+              ..._progress,
+              playableDuration: audio?.seconds ?? _progress.playableDuration,
+            });
           }}
-          audioOnly
+          progressUpdateInterval={1000}
           paused={paused}
           repeat={repeat === 'single'}
+          onLoadStart={() => playerControllerRef.current?.buffering$.next(true)}
+          onLoad={() => playerControllerRef.current?.buffering$.next(false)}
+          onError={() => playerControllerRef.current?.buffering$.next(false)}
           onPlaybackResume={() => {
             playerControllerRef.current?.paused$.next(false);
           }}

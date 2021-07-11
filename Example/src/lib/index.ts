@@ -1,5 +1,6 @@
 import AudioPlayer from './Components/AudioPlayer';
 import useAudio from './Hooks/useAudio';
+import useBufferingState from './Hooks/useBufferingState';
 import usePausedState from './Hooks/usePausedState';
 import usePlayerProgress from './Hooks/usePlayerProgress';
 import usePlaylist from './Hooks/usePlaylist';
@@ -16,4 +17,5 @@ export {
   usePlaylist,
   useAudio,
   useRepeat,
+  useBufferingState,
 };

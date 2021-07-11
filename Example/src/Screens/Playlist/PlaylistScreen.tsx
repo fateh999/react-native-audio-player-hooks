@@ -10,37 +10,38 @@ const AUDIOS = [
   {
     id: '1',
     name: 'Test',
-    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     picture: 'https://picsum.photos/250/300',
   },
   {
     id: '2',
     name: 'Test 2',
-    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
     picture: 'https://picsum.photos/250/300',
   },
   {
     id: '3',
     name: 'Test 3',
-    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
     picture: 'https://picsum.photos/250/300',
   },
   {
     id: '4',
     name: 'Test 4',
-    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
     picture: 'https://picsum.photos/250/300',
   },
   {
     id: '5',
     name: 'Test 5',
-    url: 'https://firebasestorage.googleapis.com/v0/b/document-signer-978fe.appspot.com/o/sample1.mp3?alt=media&token=c291d3b1-fab5-4508-a856-95b13514271c',
+    url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
     picture: 'https://picsum.photos/250/300',
   },
 ];
 
 function PlaylistScreen() {
   const audio = useAudio();
+  console.log('PlaylistScreen rerendered');
 
   return (
     <VStack flex={1}>
