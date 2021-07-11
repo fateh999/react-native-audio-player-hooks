@@ -22,7 +22,7 @@ npm i rxjs react-native-video
 
 ```bash
 
-yarn add react-native-audio-player
+yarn add react-native-audio-player-hooks
 
 ```
 
