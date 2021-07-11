@@ -5,25 +5,33 @@
 ## Dependencies Installation
 
 ```bash
-    yarn add rxjs react-native-video
+
+yarn add rxjs react-native-video
+
 ```
 
 or
 
 ```
-    npm i rxjs react-native-video
+
+npm i rxjs react-native-video
+
 ```
 
 ## Installation
 
 ```bash
-    yarn add react-native-audio-player
+
+yarn add react-native-audio-player
+
 ```
 
 or
 
 ```
-    npm i react-native-audio-player
+
+npm i react-native-audio-player
+
 ```
 
 ## Usage
@@ -36,13 +44,17 @@ import { PlayerManager } from "react-native-audio-player";
 PlayerManager.createPlayer();
 
 // or we can create multiple players like
+
 // PlayerManager.createPlayer('player1');
+
 // PlayerManager.createPlayer('player2');
 
 export const Player = PlayerManager.getPlayer();
 
 // or similarly we can export created players
+
 // export const Player1 = PlayerManager.getPlayer('player1');
+
 // export const Player2 = PlayerManager.getPlayer('player2');
 ```
 
@@ -55,153 +67,264 @@ import "./PlayerService";
 - Load the player component in the respective screen
 
 ```jsx
-    import { AudioPlayer } from 'react-native-audio-player';
 
-    function PlayerViewer () {
-        return (
-            <AudioPlayer />
-            // or similarly we can load multiple players
-            // <AudioPlayer keyName={'player1'} />
-            // <AudioPlayer keyName={'player2'} />
-        };
-    }
+import { AudioPlayer } from  'react-native-audio-player';
+
+
+
+function  PlayerViewer () {
+
+return (
+
+<AudioPlayer  />
+
+// or similarly we can load multiple players
+
+// <AudioPlayer keyName={'player1'} />
+
+// <AudioPlayer keyName={'player2'} />
+
+};
+
+}
+
 ```
 
 - Use the Player instance we exported to control the player
 
 ```jsx
-    // This is the basic structure of the audio list that we will be loading in the player.
-    const AUDIOS = [
-        {
-            // id is required
-            id: '1',
-            name: 'Test',
-            // url is required
-            url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
-            picture: 'https://picsum.photos/250/300',
-            // seconds: number
-            // Sometimes we get incorrect duration of audio from react-native-video so we can use this to send the duration beforehand.
-        },
-    ];
 
-    function PlayList () {
-        return (
-            <FlatList
-                data={AUDIOS}
-                ListHeaderComponent={() => <Box h={10} />}
-                renderItem={({item}) => (
-                // Some list item component
-                <PlaylistItem
-                    item={item}
-                    active={audio?.id === item.id}
-                    // We will pass in the id and the audio list, if the audio list is loaded player will not reload the playlist, unless it is a new list. or alternatively we can use the Player.load(AUDIOS) to load the playlist.
-                    onPress={() => Player.play(item.id, AUDIOS)}
-                />
-                )}
-                flex={1}
-            />
-        };
-    }
+// This is the basic structure of the audio list that we will be loading in the player.
+
+const  AUDIOS = [
+
+{
+
+// id is required
+
+id:  '1',
+
+name:  'Test',
+
+// url is required
+
+url:  'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+
+picture:  'https://picsum.photos/250/300',
+
+// seconds: number
+
+// Sometimes we get incorrect duration of audio from react-native-video so we can use this to send the duration beforehand.
+
+},
+
+];
+
+
+
+function  PlayList () {
+
+return (
+
+<FlatList
+
+data={AUDIOS}
+
+ListHeaderComponent={() =>  <Box  h={10}  />}
+
+renderItem={({item}) => (
+
+// Some list item component
+
+<PlaylistItem
+
+item={item}
+
+active={audio?.id === item.id}
+
+// We will pass in the id and the audio list, if the audio list is loaded player will not reload the playlist, unless it is a new list. or alternatively we can use the Player.load(AUDIOS) to load the playlist.
+
+onPress={() =>  Player.play(item.id, AUDIOS)}
+
+/>
+
+)}
+
+flex={1}
+
+/>
+
+};
+
+}
+
 ```
 
 - Control the player using the following methods
 
-  - Player.toggle()
-    Toggles play / pause functionality of the current audio.
+- Player.toggle()
 
-  - Player.next()
-    Plays next audio in the playlist.
+      (Toggles play / pause functionality of the current audio.)
 
-  - Player.prev()
-    Plays previous audio in the playlist.
+- Player.next()
 
-  - Player.repeat()
-    Toggles the repeat mode between 'all' | 'none' | 'single'.
+      (Plays next audio in the playlist.)
 
-  - Player.shuffle()
-    Shuffles the playlist.
+- Player.prev()
 
-  - Player.stop()
-    Closes the player and clears the playlist, this however does not removes the player instance so you can again load the playlist and play songs using same player.
+      (Plays previous audio in the playlist.)
 
-  - Player.shuffle()
-    Shuffles the playlist.
+- Player.repeat()
+
+      (Toggles the repeat mode between 'all' | 'none' | 'single'.)
+
+- Player.shuffle()
+
+      (Shuffles the playlist.)
+
+- Player.stop()
+
+      (Closes the player and clears the playlist, this however does not removes the player instance so you can again load the playlist and play songs using same player.)
+
+- Player.shuffle()
+
+      (Shuffles the playlist.)
 
 - Hooks to show the player progress and current state
 
-  - useAudio()
-    Returns current active audio
+      - useAudio(): any
 
-  - usePausedState()
-    Returns active audio paused state
+      		(Returns current active audio)
 
-  - useBufferingState()
-    Returns active audio buffering state
 
-  - usePlayerProgress()
-    Returns active audio progress returning
 
-  ```
-  {
-  currentTime: 0,
-  playableDuration: 0,
-  seekableDuration: 0,
+      - usePausedState(): boolean
+
+      		(Returns active audio paused state)
+
+
+
+      - useBufferingState(): boolean
+
+      		(Returns active audio buffering state)
+
+
+
+      - usePlayerProgress(): {
+
+  currentTime: number,
+  playableDuration: number,
+  seekableDuration: number,
   }
-  ```
 
-  - useRepeat()
-    Returns repeat mode status
+      		(Returns active audio progress)
 
-  - useShuffledState()
-    Returns whether playlist is shuffled
 
-  - usePlaylist()
-    Returns the loaded playlist
+
+      - useRepeat(): 'all' | 'none' | 'single'
+
+      		(Returns repeat mode status)
+
+
+
+      - useShuffledState(): boolean
+
+      		(Returns whether playlist is shuffled)
+
+
+
+      - usePlaylist(): Array<any>
+
+      		(Returns the loaded playlist)
 
 ## Basic Props
 
 ```typescript
-import { ComponentProps } from "react";
-import Video, { OnProgressData } from "react-native-video";
 
-export type AudioPlayerProps = Omit<ComponentProps<typeof Video>, "source"> & {
+import { ComponentProps } from  "react";
+
+import  Video, { OnProgressData } from  "react-native-video";
+
+
+
+export  type  AudioPlayerProps = Omit<ComponentProps<typeof  Video>, "source"> & {
+
 keyName?: string;
+
 };
 
-export type REPEAT_MODES = "all" | "none" | "single";
 
-export type useAudioType = {
+
+export  type  REPEAT_MODES = "all" | "none" | "single";
+
+
+
+export  type  useAudioType = {
+
 keyName?: string;
-onAudioChanged?: (currentAudio: any) => void;
+
+onAudioChanged?: (currentAudio: any) =>  void;
+
 };
 
-export type usePausedStateType = {
+
+
+export  type  usePausedStateType = {
+
 keyName?: string;
-onPausedStateChanged?: (\_paused: boolean) => void;
+
+onPausedStateChanged?: (\_paused: boolean) =>  void;
+
 };
 
-export type useBufferingStateType = {
+
+
+export  type  useBufferingStateType = {
+
 keyName?: string;
-onBufferingStateChanged?: (\_buffering: boolean) => void;
+
+onBufferingStateChanged?: (\_buffering: boolean) =>  void;
+
 };
 
-export type useShuffledStateType = {
+
+
+export  type  useShuffledStateType = {
+
 keyName?: string;
-onShuffledStateChanged?: (\_shuffled: boolean) => void;
+
+onShuffledStateChanged?: (\_shuffled: boolean) =>  void;
+
 };
 
-export type usePlayerProgressType = {
+
+
+export  type  usePlayerProgressType = {
+
 keyName?: string;
-onProgressChanged?: (\_progress: OnProgressData) => void;
+
+onProgressChanged?: (\_progress: OnProgressData) =>  void;
+
 };
 
-export type usePlaylistType = {
+
+
+export  type  usePlaylistType = {
+
 keyName?: string;
-onChangedPlaylist?: (\_playlist: Array<any>) => void;
+
+onChangedPlaylist?: (\_playlist: Array<any>) =>  void;
+
 };
 
-export type useRepeatType = {
+
+
+export  type  useRepeatType = {
+
 keyName?: string;
-onRepeatChanged?: (\_repeat: REPEAT_MODES) => void;
+
+onRepeatChanged?: (\_repeat: REPEAT_MODES) =>  void;
+
 };
+
 ```
