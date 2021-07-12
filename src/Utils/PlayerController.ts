@@ -1,6 +1,6 @@
-import Video, {OnProgressData} from 'react-native-video';
-import {BehaviorSubject} from 'rxjs';
-import {REPEAT_MODES} from '../Types';
+import Video, { OnProgressData } from "react-native-video";
+import { BehaviorSubject } from "rxjs";
+import { REPEAT_MODES } from "../Types";
 
 class PlayerController {
   ref: Video | undefined = undefined;
@@ -11,7 +11,7 @@ class PlayerController {
   paused$ = new BehaviorSubject<boolean>(true);
   buffering$ = new BehaviorSubject<boolean>(false);
   shuffled$ = new BehaviorSubject<boolean>(false);
-  repeat$ = new BehaviorSubject<REPEAT_MODES>('none');
+  repeat$ = new BehaviorSubject<REPEAT_MODES>("none");
   progress$ = new BehaviorSubject<OnProgressData>({
     currentTime: 0,
     playableDuration: 0,
@@ -35,10 +35,12 @@ class PlayerController {
         this.paused$.next(false);
         this.seek(0);
       } else {
-        this.load(currentPlaylist);
-        const _audio = this.playListMap[id];
-        this.currentAudio$.next(_audio);
-        this.paused$.next(false);
+        if (currentPlaylist.length > 0) {
+          this.load(currentPlaylist);
+          const _audio = this.playListMap[id];
+          this.currentAudio$.next(_audio);
+          this.paused$.next(false);
+        }
       }
     }
   };
@@ -61,16 +63,18 @@ class PlayerController {
     if (currentAudio) {
       const playList = this.playList$.getValue();
       const repeat = this.repeat$.getValue();
-      if (repeat !== 'single') {
+      if (repeat !== "single") {
         const currentAudioIndex = this.playListMap[currentAudio.id].index;
         const nextAudioIndex = currentAudioIndex + 1;
         if (nextAudioIndex <= playList.length - 1) {
           this.play(playList[nextAudioIndex].id);
-        } else if (repeat === 'all') {
+        } else if (repeat === "all") {
           this.play(playList[0].id);
         } else {
           this.stop();
         }
+      } else {
+        this.seek(0);
       }
     }
   };
@@ -80,29 +84,31 @@ class PlayerController {
     if (currentAudio) {
       const playList = this.playList$.getValue();
       const repeat = this.repeat$.getValue();
-      if (repeat !== 'single') {
+      if (repeat !== "single") {
         const currentAudioIndex = this.playListMap[currentAudio.id].index;
         const prevAudioIndex = currentAudioIndex - 1;
         if (prevAudioIndex >= 0) {
           this.play(playList[prevAudioIndex].id);
-        } else if (repeat === 'all') {
+        } else if (repeat === "all") {
           this.play(playList[playList.length - 1].id);
         }
       }
+    } else {
+      this.seek(0);
     }
   };
 
   repeat = () => {
     const repeat = this.repeat$.getValue();
     switch (repeat) {
-      case 'all':
-        this.repeat$.next('none');
+      case "all":
+        this.repeat$.next("none");
         break;
-      case 'none':
-        this.repeat$.next('single');
+      case "none":
+        this.repeat$.next("single");
         break;
-      case 'single':
-        this.repeat$.next('all');
+      case "single":
+        this.repeat$.next("all");
         break;
     }
   };
@@ -114,7 +120,7 @@ class PlayerController {
     } else {
       this.shuffled$.next(true);
       this.unshuffledPlayList = JSON.parse(
-        JSON.stringify(this.playList$.getValue()),
+        JSON.stringify(this.playList$.getValue())
       );
       const newPlaylist = this._getShuffledArr(this.unshuffledPlayList);
       this.load(newPlaylist);
@@ -132,7 +138,7 @@ class PlayerController {
 
   load = (playlist: Array<any>) => {
     playlist.forEach((audio, index) => {
-      this.playListMap[audio.id] = {...audio, index};
+      this.playListMap[audio.id] = { ...audio, index };
     });
     this.playList$.next(playlist);
   };
@@ -143,9 +149,13 @@ class PlayerController {
     this.currentAudio$.next(undefined);
   };
 
+  stopAudio = () => {
+    this.currentAudio$.next(undefined);
+  };
+
   formatTimePlayer = (seconds: number) => {
     return `${this._addZeroToNumber(
-      new Date(seconds * 1000).getUTCMinutes(),
+      new Date(seconds * 1000).getUTCMinutes()
     )} : ${this._addZeroToNumber(new Date(seconds * 1000).getUTCSeconds())}`;
   };
 

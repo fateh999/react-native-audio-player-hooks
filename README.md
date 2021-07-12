@@ -150,7 +150,7 @@ item={item}
 
 active={audio?.id === item.id}
 
-// We will pass in the id and the audio list, if the audio list is loaded player will not reload the playlist, unless it is a new list. or alternatively we can use the Player.load(AUDIOS) to load the playlist.
+// We will pass in the id and the audio list, if the audio list is loaded player will not reload the playlist, unless it is a new list. or alternatively we can use the Player.load(AUDIOS) to load the playlist & then just use Player.play(item.id).
 
 onPress={() =>  Player.play(item.id, AUDIOS)}
 
@@ -192,7 +192,11 @@ flex={1}
 
 - Player.stop()
 
-      (Closes the player and clears the playlist, this however does not removes the player instance so you can again load the playlist and play songs using same player.)
+      (Closes the player and clears the playlist & current audio, this however does not removes the player instance so you can again load the playlist and play songs using same player.)
+
+- Player.stopAudio()
+
+      (Closes the player and clears only the current audio, so you don't need to load the playlist again.)
 
 - Player.shuffle()
 
