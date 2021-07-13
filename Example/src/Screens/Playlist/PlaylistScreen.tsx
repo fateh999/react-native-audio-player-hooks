@@ -12,30 +12,35 @@ const AUDIOS = [
     name: 'Test',
     url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
     picture: 'https://picsum.photos/250/300',
+    seconds: 372,
   },
   {
     id: '2',
     name: 'Test 2',
     url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
     picture: 'https://picsum.photos/250/300',
+    seconds: 425,
   },
   {
     id: '3',
     name: 'Test 3',
     url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3',
     picture: 'https://picsum.photos/250/300',
+    seconds: 343,
   },
   {
     id: '4',
     name: 'Test 4',
     url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-4.mp3',
     picture: 'https://picsum.photos/250/300',
+    seconds: 302,
   },
   {
     id: '5',
     name: 'Test 5',
     url: 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-5.mp3',
     picture: 'https://picsum.photos/250/300',
+    seconds: 353,
   },
 ];
 
@@ -63,7 +68,7 @@ function PlaylistScreen() {
         flex={1}
       />
       <Box>
-        <AudioPlayer />
+        <AudioPlayer playInBackground />
       </Box>
 
       <MiniPlayer />

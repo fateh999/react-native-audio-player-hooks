@@ -16,7 +16,7 @@ function AudioPlayer(props: AudioPlayerProps) {
     automaticallyWaitsToMinimizeStalling = true,
     audioOnly = false,
     playInBackground = false,
-    playWhenInactive = false,
+    playWhenInactive = true,
   } = props;
   const keyNameRef = useRef(keyName);
   const playerControllerRef = useRef<PlayerController>();
