@@ -235,10 +235,10 @@ flex={1}
 
 ## Remote Player Control
 
-- Install react-native-music-control
+- Install react-native-music-control & enable background mode on both platforms as mentioned in the doc.
 
 ```
-      yarn add react-native-music-control
+yarn add react-native-music-control
 ```
 
 - Set playInBackground prop as true in the AudioPlayer.
