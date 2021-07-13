@@ -1,6 +1,6 @@
 {
   "name": "react-native-audio-player-hooks",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Audio player hooks & Utility Classes to play audio files, using libraries react-native-video, rxjs, with playlist handling, player controls.",
   "scripts": {
     "build": "tsc"
