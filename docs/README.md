@@ -241,6 +241,12 @@ flex={1}
       yarn add react-native-music-control
 ```
 
+- Set playInBackground prop as true in the AudioPlayer.
+
+```jsx
+<AudioPlayer playInBackground />
+```
+
 - Modify the Player Service like this and change the feature you need.
 
 ```typescript
