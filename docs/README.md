@@ -31,6 +31,7 @@ npm i react-native-audio-player-hooks
 
 ## Demo
 
+
 ![](player.gif)
 
 ## Usage
