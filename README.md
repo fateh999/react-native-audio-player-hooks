@@ -9,18 +9,26 @@
 
 ## Dependencies Installation
 
-```bash
-
+```
 yarn add rxjs react-native-video
-
 ```
 
 or
 
 ```
-
 npm i rxjs react-native-video
+```
 
+## Installation
+
+```
+yarn add react-native-audio-player-hooks
+```
+
+or
+
+```
+npm i react-native-audio-player-hooks
 ```
 
 ## Documentation :
